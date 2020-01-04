@@ -61,12 +61,6 @@ RSpec.describe NxtConfig::Struct do
     end
   end
 
-  describe "#to_h" do
-    it "returns a hash with indifferent access" do
-      expect(subject.to_h).to be_an ActiveSupport::HashWithIndifferentAccess
-    end
-  end
-
   describe "#[]" do
     context "when the key exists" do
       context "when the key is a symbol" do

@@ -6,10 +6,6 @@ module NxtConfig
       hash.freeze
     end
 
-    def to_h
-      hash.dup
-    end
-
     delegate :[], to: :hash
 
     private

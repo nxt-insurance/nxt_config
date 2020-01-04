@@ -1,8 +1,11 @@
 # NxtConfig
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nxt_config`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is a very simple tool to load YAML files into strict configuration structs, accessible through global constants. This is inspired by the famous [config](https://github.com/railsconfig/config) gem. The core features are:
 
-TODO: Delete this and the text above, and describe your gem
+* Load the content of a YAML file as a configuration object
+* Strict attribute accessors
+* Infinite amount of YAML files/configuration objects loadable (not just one)
+* Configuration objects can be registered in a given namespace (especially useful when in use in ruby gems loaded by other applications)
 
 ## Installation
 
@@ -22,7 +25,39 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You can load YAML files and populate their content into a configuration object using `NxtConfig.load_and_constantize`. If you are in a rails application, you can do this in an initializer (e.g. `config/initializers/nxt_config.rb`).
+
+```ruby
+NxtConfig.load_and_constantize(
+	source: Rails.root.join('config', 'external_api.yml.erb'),
+	constant_name: :ExternalApiConfig,
+	namespace: MyRailsApp
+)
+```
+
+This assumes your rails app defines the `MyRailsApp` constant in `config/aplication.rb` and populates the configuration to `MyRailsApp::ExternalApiConfig`. You can also skip the namespace parameter alltogether or pass in any other module that is defined at the time of calling `::load_and_constantize`.
+
+```ruby
+# Use struct like method chaining to access nested data
+MyRailsApp::ExternalApiConfig.http.headers.user_agent
+# => "MyRailsApp 1.0.0"
+
+# The struct methods are strict, so they raise an error if the attribute does not exist
+MyRailsApp::ExternalApiConfig.non_existent_key
+# => raises NoMethodError
+
+# You can also use hash like #[] calls with symbols
+MyRailsApp::ExternalApiConfig[:http][:headers][:user_agent]
+# => "MyRailsApp 1.0.0"
+
+# You can also use hash like #[] calls with strings
+MyRailsApp::ExternalApiConfig["http"]["headers"]["user_agent"]
+# => "MyRailsApp 1.0.0"
+
+# If you don't walk through the struct until its leaves, you will get a sub struct
+MyRailsApp::ExternalApiConfig.http
+# => #<NxtConfig::Struct:0x00007fe657467680 @hash={"headers"=>#<NxtConfig::Struct:0x00007fe657467518 @hash={"user_agent"=>"my cool app", "api_key"=>"secret123"}>}>
+```
 
 ## Development
 
@@ -32,7 +67,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/nxt_config.
+Bug reports and pull requests are welcome on GitHub at https://github.com/nxt-insurance/nxt_config.
 
 
 ## License
