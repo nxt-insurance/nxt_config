@@ -1,0 +1,1 @@
+attr: <%= File.read(".ruby-version") %>

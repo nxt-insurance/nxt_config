@@ -1,0 +1,14 @@
+flat_attribute: hello world
+http:
+  headers:
+    user_agent: my cool app
+    api_key: secret123
+mail:
+  sender: john.doe@example.org
+  server: smtp://example.org
+array_of_strings:
+  - one
+  - two
+  - three
+array_of_hashes:
+  - key: value
