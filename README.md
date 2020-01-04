@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/nxt-insurance/nxt_config.svg?style=svg)](https://circleci.com/gh/nxt-insurance/nxt_config) [![Depfu](https://badges.depfu.com/badges/55572b7950c22f7f472a0adbf81b2ea4/count.svg)](https://depfu.com/github/nxt-insurance/nxt_config?project_id=10455)
+
 # NxtConfig
 
 This is a very simple tool to load YAML files into strict configuration structs, accessible through global constants. This is inspired by the famous [config](https://github.com/railsconfig/config) gem. The core features are:
