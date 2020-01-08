@@ -27,17 +27,15 @@ Or install it yourself as:
 
 ## Usage
 
-You can load YAML files and populate their content into a configuration object using `NxtConfig.load_and_constantize`. If you are in a rails application, you can do this in an initializer (e.g. `config/initializers/nxt_config.rb`).
+You can load YAML files and populate their content into a configuration object using `NxtConfig.load`. If you are in a rails application, you can do this in an initializer (e.g. `config/initializers/nxt_config.rb`).
 
 ```ruby
-NxtConfig.load_and_constantize(
-	source: Rails.root.join('config', 'external_api.yml.erb'),
-	constant_name: :ExternalApiConfig,
-	namespace: MyRailsApp
-)
+module MyRailsApp
+  ExternalApiConfig = NxtConfig.load Rails.root.join('config', 'external_api.yml.erb')
+end
 ```
 
-This assumes your rails app defines the `MyRailsApp` constant in `config/aplication.rb` and populates the configuration to `MyRailsApp::ExternalApiConfig`. You can also skip the namespace parameter alltogether or pass in any other module that is defined at the time of calling `::load_and_constantize`.
+Of course you can also load configuration structs everywhere else in the application. Depending on where you assign it to a constant, you can have many configuration structs available via constants namespaced all over your application, scoped to the context where you need them.
 
 ```ruby
 # Use struct like method chaining to access nested data
