@@ -61,24 +61,48 @@ RSpec.describe NxtConfig::Struct do
     end
   end
 
-  describe "#[]" do
-    context "when the key exists" do
-      context "when the key is a symbol" do
-        it "accesses the data of the struct" do
-          expect(subject[:http][:headers][:user_agent]).to eq "my cool app"
+  describe "#fetch" do
+    context "without arguments" do
+      it 'raises an ArgumentError' do
+        expect { subject.fetch }.to raise_error(ArgumentError, "Provide at least one key")
+      end
+    end
+
+    context "with one key" do
+      context "that exists" do
+        it "returns the attribute value" do
+          expect(subject.fetch(:flat_attribute)).to eq "hello world"
         end
       end
 
-      context "when the key is a string" do
-        it "accesses the data of the struct" do
-          expect(subject["http"]["headers"]["user_agent"]).to eq "my cool app"
+      context "that does not exist" do
+        it "raises a KeyError" do
+          expect { subject.fetch(:oh_no) }.to raise_error(KeyError)
         end
       end
     end
 
-    context "when the key does not exist" do
-      it "accesses the data of the struct" do
-        expect(subject[:nils]).to be_nil
+    context "with more than one key" do
+      context "that exist" do
+        it "returns the attribute value" do
+          expect(subject.fetch(:mail, :sender)).to eq "john.doe@example.org"
+        end
+      end
+
+      context "when one of the keys does not exist" do
+        it "raises a KeyError" do
+          expect { subject.fetch(:mail, :postbox) }.to raise_error(KeyError)
+        end
+      end
+    end
+
+    context "with a block" do
+      context "and the key does not exist" do
+        let(:block) { Proc.new { :my_return_value } }
+
+        it "calls the block" do
+          expect(subject.fetch(:oh_no, &block)).to eq :my_return_value
+        end
       end
     end
   end

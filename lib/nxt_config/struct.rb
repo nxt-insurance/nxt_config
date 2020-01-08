@@ -6,7 +6,15 @@ module NxtConfig
       hash.freeze
     end
 
-    delegate :[], to: :hash
+    def fetch(*keys, &block)
+      if keys.length == 0
+        raise ArgumentError, "Provide at least one key"
+      elsif keys.length == 1
+        hash.fetch(keys.first, &block)
+      else
+        hash.fetch(keys.first, &block).fetch(*keys[1..-1], &block)
+      end
+    end
 
     private
 
@@ -19,7 +27,7 @@ module NxtConfig
     end
 
     def transform_hash_value(value)
-      if value.is_a?(ActiveSupport::HashWithIndifferentAccess)
+      if value.is_a?(ActiveSupport::HashWithIndifferentAccess) || value.is_a?(Hash)
         Struct.new(value)
       elsif value.is_a?(Array)
         value.map { |item| transform_hash_value(item) }

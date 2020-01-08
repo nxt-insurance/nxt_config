@@ -48,13 +48,18 @@ MyRailsApp::ExternalApiConfig.http.headers.user_agent
 MyRailsApp::ExternalApiConfig.non_existent_key
 # => raises NoMethodError
 
-# You can also use hash like #[] calls with symbols
-MyRailsApp::ExternalApiConfig[:http][:headers][:user_agent]
+# You can also use hash like #fetch calls with symbols (multiple ones, like with Hash#dig)
+MyRailsApp::ExternalApiConfig.fetch(:http, :headers, :user_agent)
 # => "MyRailsApp 1.0.0"
 
-# You can also use hash like #[] calls with strings
-MyRailsApp::ExternalApiConfig["http"]["headers"]["user_agent"]
+# You can also use hash like #fetch calls with strings (multiple ones, like with Hash#dig)
+MyRailsApp::ExternalApiConfig.fetch("http", "headers", "user_agent")
 # => "MyRailsApp 1.0.0"
+
+MyRailsApp::ExternalApiConfig.fetch(:http, :oh_no, :user_agent, &Proc.new { 'Hy!' })
+# => "Hy!"
+
+# You can also pass a block to #fetch in case a key does not exist
 
 # If you don't walk through the struct until its leaves, you will get a sub struct
 MyRailsApp::ExternalApiConfig.http
