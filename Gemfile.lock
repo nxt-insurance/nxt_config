@@ -36,7 +36,7 @@ GEM
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    rake (12.3.3)
+    rake (13.0.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -64,8 +64,8 @@ PLATFORMS
 DEPENDENCIES
   guard-rspec
   nxt_config!
-  rake (~> 12.0)
-  rspec (~> 3.0)
+  rake
+  rspec
   rspec_junit_formatter
 
 BUNDLED WITH
