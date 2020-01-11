@@ -7,7 +7,7 @@ This is a very simple tool to load YAML files into strict configuration structs,
 * Load the content of a YAML file as a configuration object
 * Strict attribute accessors
 * Infinite amount of YAML files/configuration objects loadable (not just one)
-* Configuration objects can be registered in a given namespace (especially useful when in use in ruby gems loaded by other applications)
+* Configuration objects can be registered in a given namespace (especially useful when in use in ruby gems loaded by other applications) by calling `NxtConfig::load` in the namespace where the constant lives that its config struct is assigned to.
 
 ## Installation
 
