@@ -1,6 +1,8 @@
 # UNRELEASED
 
-Todo
+### Added
+
+- [internal] Added [guard](https://github.com/guard/guard) to run specs automatically upon file changes.
 
 # v0.2.0 2019-01-08
 
