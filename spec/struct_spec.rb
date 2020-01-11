@@ -72,12 +72,14 @@ RSpec.describe NxtConfig::Struct do
       context "that exists" do
         it "returns the attribute value" do
           expect(subject.fetch(:flat_attribute)).to eq "hello world"
+          expect(subject.fetch("flat_attribute")).to eq "hello world"
         end
       end
 
       context "that does not exist" do
         it "raises a KeyError" do
           expect { subject.fetch(:oh_no) }.to raise_error(KeyError)
+          expect { subject.fetch("oh_no") }.to raise_error(KeyError)
         end
       end
     end
@@ -86,6 +88,7 @@ RSpec.describe NxtConfig::Struct do
       context "that exist" do
         it "returns the attribute value" do
           expect(subject.fetch(:mail, :sender)).to eq "john.doe@example.org"
+          expect(subject.fetch("mail", "sender")).to eq "john.doe@example.org"
         end
       end
 
