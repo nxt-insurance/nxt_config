@@ -27,7 +27,7 @@ Or install it yourself as:
 
 ## Usage
 
-You can create configuration object using `NxtConfig.load` from YAML files or directly from a hash. 
+You can create a configuration object using `NxtConfig.load` from YAML files or directly from a hash. 
 If you are in a rails application, you can do this in an initializer (e.g. `config/initializers/nxt_config.rb`).
 
 ```ruby
