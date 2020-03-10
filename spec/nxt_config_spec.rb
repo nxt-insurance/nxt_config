@@ -1,30 +1,40 @@
 require 'date'
 
 RSpec.describe NxtConfig do
-  it "has a version number" do
+  it 'has a version number' do
     expect(NxtConfig::VERSION).not_to be nil
   end
 
-  describe "::load" do
+  describe '::load' do
     subject do
-      NxtConfig.load(source_file)
+      NxtConfig.load(source)
     end
 
-    context "with yaml file" do
-      let(:source_file) { "spec/fixtures/example.yml" }
+    context 'with hash' do
+      let(:source) { YAML.load(File.read('spec/fixtures/example.yml')) }
 
-      it "instantiates a config struct" do
+      it 'instantiates a config struct' do
+        expect(source).to be_a(Hash)
         expect(subject).to be_a NxtConfig::Struct
-        expect(subject.http.headers.user_agent).to eq "my cool app"
+        expect(subject.http.headers.user_agent).to eq 'my cool app'
       end
     end
 
-    context "with yaml file that contains erb content" do
-      let(:source_file) { "spec/fixtures/example_with_erb_content.yml" }
+    context 'with yaml file' do
+      let(:source) { 'spec/fixtures/example.yml' }
 
-      it "instantiates a config struct" do
+      it 'instantiates a config struct' do
         expect(subject).to be_a NxtConfig::Struct
-        expect(subject.attr).to eq File.read(".ruby-version").strip # erb content of attr value
+        expect(subject.http.headers.user_agent).to eq 'my cool app'
+      end
+    end
+
+    context 'with yaml file that contains erb content' do
+      let(:source) { 'spec/fixtures/example_with_erb_content.yml' }
+
+      it 'instantiates a config struct' do
+        expect(subject).to be_a NxtConfig::Struct
+        expect(subject.attr).to eq File.read('.ruby-version').strip # erb content of attr value
       end
     end
   end

@@ -27,7 +27,8 @@ Or install it yourself as:
 
 ## Usage
 
-You can load YAML files and populate their content into a configuration object using `NxtConfig.load`. If you are in a rails application, you can do this in an initializer (e.g. `config/initializers/nxt_config.rb`).
+You can create a configuration object using `NxtConfig.load` from YAML files or directly from a hash. 
+If you are in a rails application, you can do this in an initializer (e.g. `config/initializers/nxt_config.rb`).
 
 ```ruby
 module MyRailsApp
@@ -35,7 +36,9 @@ module MyRailsApp
 end
 ```
 
-Of course you can also load configuration structs everywhere else in the application. Depending on where you assign it to a constant, you can have many configuration structs available via constants namespaced all over your application, scoped to the context where you need them.
+Of course you can also load configuration structs everywhere else in the application. 
+Depending on where you assign it to a constant, you can have many configuration structs available via constants namespaced all over your application, 
+scoped to the context where you need them.
 
 ```ruby
 # Use struct like method chaining to access nested data

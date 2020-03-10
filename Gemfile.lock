@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nxt_config (0.2.1)
+    nxt_config (0.2.2)
 
 GEM
   remote: https://rubygems.org/

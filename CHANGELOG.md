@@ -1,3 +1,12 @@
+# v0.2.2 2019-03-10
+
+### Added
+
+- [internal] Allow to load NxtConfig from a hash source
+
+[Compare v0.2.1...v0.2.2](https://github.com/nxt-insurance/nxt_config/compare/v0.2.0...v0.2.1)
+
+
 # v0.2.1 2019-01-11
 
 ### Added
