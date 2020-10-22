@@ -1,8 +1,8 @@
-require "erb"
-require "yaml"
+require 'erb'
+require 'yaml'
 
-require "nxt_config/struct"
-require "nxt_config/version"
+require 'nxt_config/struct'
+require 'nxt_config/version'
 
 module NxtConfig
   def load(filename_or_hash)

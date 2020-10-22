@@ -1,19 +1,19 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 # Specify your gem's dependencies in nxt_config.gemspec
 gemspec
 
-gem "rake"
-gem "rspec"
+gem 'rake'
+gem 'rspec'
 
 group :development, :test do
   gem 'nxt_cop'
 end
 
 group :development do
-  gem "guard-rspec", require: false
+  gem 'guard-rspec', require: false
 end
 
 group :test do
-  gem "rspec_junit_formatter" # for CircleCI
+  gem 'rspec_junit_formatter' # for CircleCI
 end
