@@ -11,7 +11,7 @@ RSpec.describe NxtConfig do
     end
 
     context 'with hash' do
-      let(:source) { YAML.load(File.read('spec/fixtures/example.yml')) }
+      let(:source) { YAML.safe_load(File.read('spec/fixtures/example.yml')) }
 
       it 'instantiates a config struct' do
         expect(source).to be_a(Hash)
