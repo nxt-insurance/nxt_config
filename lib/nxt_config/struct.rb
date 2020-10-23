@@ -8,7 +8,7 @@ module NxtConfig
 
     def fetch(*keys, &block)
       if keys.length == 0
-        raise ArgumentError, "Provide at least one key"
+        raise ArgumentError, 'Provide at least one key'
       elsif keys.length == 1
         hash.fetch(keys.first.to_sym, &block)
       else
