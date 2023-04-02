@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:3.2.1-node
+      - image: cimg/ruby:3.2.1
     environment:
       BUNDLER_VERSION: 2.4.10
 
