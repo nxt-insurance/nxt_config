@@ -97,7 +97,7 @@ GEM
       rubocop (~> 1.33)
     ruby-progressbar (1.13.0)
     shellany (0.0.1)
-    thor (1.2.1)
+    thor (1.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
